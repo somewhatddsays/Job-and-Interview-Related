@@ -73,4 +73,47 @@
     - Sematext Docker Agent
     - Kubernetes log metadata
 
+## Introduction to Kubernetes
+#### What is Kubernetes?
+Kubernetes (K8s) is an open-source container orchestration platform originally developed by Google. It is used to manage containerized applications across a cluster of machines.
+Kubernetes provides:
+- High availability
+- Zero downtime deployments
+- Auto scaling
+- Self-healing
+- Automatic rollbacks
+
+📌Kubernetes was inspired by Google's internal systems Borg & Omega (used since ~2003). Google open-sourced Kubernetes in 2014.
+
 ---
+
+#### What does orchestration do?
+Orchestration is the automation of running containers in production.
+It handles:
+- Configuring and scheduling containers
+- Provisioning and deployments
+- High availability (HA)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
