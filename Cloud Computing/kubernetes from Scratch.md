@@ -186,28 +186,294 @@ Every kubectl command becomes an API call to the master.
 
 ## Kubernetes Core Concepts
 ### 🧱Pod
-A Pod is the smallest deployable unit in Kubernetes.\
+A Pod is the s**mallest deployable unit in Kubernetes.**\
 A Pod can run:
 1. [X] One container (most common)
 2. [X] Multiple tightly coupled containers (advanced use case)\
 
-📌Key Pod notes:
+📌**Key Pod notes**:
    - Every Pod gets one **IP address** 
    - Containers inside the same Pod share:
      - network namespace 
      - IP address 
      - resources
    - Communication between different Pods happens via **Pod IPs**
+---
+### 🚀Deployment
+A Deployment provides **declarative updates** for your app.\
+It can:
+- deploy Pods via ReplicaSets 
+- update and rollback versions 
+- scale replicas 
+- pause/resume deployments
+---
 
+### Services 🌐
+A Service provides a stable endpoint to access Pods.\
+Pods are volatile (can be recreated), but Services provide:
+1. [X] stable IP 
+2. [X] stable DNS name 
+3. [X] load balancing across replicas
+---
 
+### 📂Namespace
+A Namespace is a logical partition inside a cluster.\
+✅Used for:
+   - team isolation
+   - project separation
+   - resource quota allocation\
+📌Resources inside the same namespace must be unique.
+---
+### 🎯Desired State
+Kubernetes works using desired state declared in YAML files.\
+Example:
+   - Desired: 3 replicas
+   - Current: 2 replicas\
+✅ Kubernetes automatically creates 1 more Pod.
+---
 
+### 🔐Secret
+Secrets store sensitive values like:
+- passwords 
+- tokens 
+- API keys 
+- SSH keys
 
+Secrets can be used as:
+1. [X] environment variables
+2. [X] mounted files\
+⚠️ Note: Kubernetes stores secrets as Base64 encoded, not encrypted by default
+---
+### CoreDNS
+- CoreDNS provides DNS resolution inside Kubernetes clusters.
+---
+### 🔁ReplicaSet & Deployment
+ReplicaSet ensures a number of replicas are running.\
+Deployment manages ReplicaSets and supports:
+- rolling updates 
+- rollback \
+- scaling
+---
+### 📌Daemon Set
+DaemonSet ensures that a specific Pod runs on:\
+✅all nodes\
+✅or selected nodes\
 
+**Use cases:**
+- log collection (e.g., fluentd, logstash)
+- node monitoring (collectd)
+- storage daemons (glusterd)
+---
 
+### 🏷️Labels and Seletors
+✅Labels
+Key/ value pairs attached to objects:
 
+```
+stage = production
+owner = aman
+```
+###### **Examples: Add labels**
+```
+kubectl get pods-show-labels
+kubectl label pod labelex owner ahmed
+kubectl get pods-show-labels
+```
+✅**Selectors**\
+Select objects using labels:
+```
+kubectl get pods -1 owner=aman
+kubectl get pods -1 stage=production
+kubectl get pods -1 'stage in (production, development)'
+```
+---
+### 📝Annotations
+Annotations store non-identifying metadata used by external tools.\
+✅No selectors apply here (unlike labels)
+---
+### 📌Node Affinity & Anti-Affinity
+Affinity is a more powerful version of nodeSelector. It supports:
+   - flexible matching rules 
+   - soft preferences 
+   - pod-to-pod placement rules
+---
+### 🚫Taints & Tolerations
+Taints repel Pods from nodes.\
+**Example:**\
+`kubectl taint nodes node1 key=value: NoSchedule`\
+**Remove taint:**\
+`kubectl taint nodes nodel key value: NoSchedule-
+`
+---
+### ⚙️ConfigMap
+ConfigMaps store configuration like:
+- env values
+- configs
+- ports
+- args\
+✅ Keeps configuration separated from Pod YAML
+---
+### 💾Volume
+Volumes are Pod-level storage shared across containers in the Pod.
 
+✅Data survives container restarts\
+❌Removed when the Pod is removed (unless PV/PVC used)
+---
+## kubectl Commands (Essentials)
+### ✅kubectl Syntax
+`kubectl [command] [TYPE] [NAME] [flags]`
 
+**Examples:**
+```
+kubectl get pod pod1
+kubectl get pods pod1
+kubectl get po pod1
+kubectl get pods
+kubectl describe pod pod1
+kubectl delete pod pod1
+```
+### ✅Most Common kubectl Commands
+#### PODS
+```
+kubectl get pods
+kubectl get pods -A
+kubectl describe pod <pod>
+kubectl get pod <pod> -o wide
+kubectl logs <pod>
+kubectl exec -it <pod> -- sh
+```
 
+#### Deployments
+```
+kubectl get deploy
+kubectl create -f deployment.yaml
+kubectl apply -f deployment.yaml
+kubectl rollout status deploy/<name>
+kubectl rollout history deploy/<name>
+kubectl rollout undo deploy/<name> --to-revision=2
+```
+
+#### Services
+```
+kubectl get svc
+kubectl describe svc <svc>
+kubectl expose deploy nginx --port=80 --type=NodePort
+```
+---
+## Kubernetes YAML Basics
+### ✅Why YAML?
+YAML is a superset of JSON, but:
+- easier to read 
+- supports comments 
+- uses fewer characters
+---
+### ✅Required Fields in Kubernetes YAML
+Every Kubernetes YAML must include:
+- apiVersion 
+- kind 
+- metadata 
+- spec
+
+**Example Pod YAML:**
+```
+apiVersion: v1
+kind: Pod
+metadata:
+   name: website
+   labels:
+      name:web
+spec:
+   containers:
+      - name: web-server
+      image:nginx
+      ports:
+         - containerPort:80
+```
+---
+## Kubernetes Installation (kubeadm on CentOS)
+### ✅ Step 1: Prepare All Nodes
+
+**Configure /etc/hosts**
+
+**Example:**
+```
+192.168.179.133 k8s-master
+192.168.179.131 node01
+192.168.179.132 node02
+```
+---
+
+**Firewall Configuration (Master)**
+
+```
+firewall-cmd --permanent --add-port=6443/tcp
+firewall-cmd --permanent --add-port=2379-2380/tcp
+firewall-cmd --permanent --add-port=10250/tcp
+firewall-cmd --permanent --add-port=10251/tcp
+firewall-cmd --permanent --add-port=10252/tcp
+firewall-cmd --permanent --add-port=10255/tcp
+firewall-cmd --reload
+```
+
+**Worker nodes:**
+```
+firewall-cmd --permanent --add-port=10251/tcp
+firewall-cmd --permanent --add-port=10252/tcp
+firewall-cmd --reload
+```
+**Check firewall rules:**
+```
+firewall-cmd --list-all
+```
+---
+
+**Enable Kernel Module + IPTables**
+```
+cat <<EOF > /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+
+sysctl --system
+modprobe br_netfilter
+echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
+```
+---
+
+**Disable SELinux**
+```
+setenforce 0
+```
+```
+sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+```
+---
+
+**Disable Swap**
+
+swapoff -a
+
+Edit /etc/fstab and comment swap line.
+
+---
+✅ Install Docker
+
+yum install -y yum-utils device-mapper-persistent-data
+yum-config-manager --add-repo
+https://download.docker.com/linux/centos/docker-ce.repo
+
+yum install -y docker-ce
+systemctl enable docker
+systemctl start docker
+
+---
+✅ Install Kubernetes Packages
+
+Create repo:
+
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
 
 
 
