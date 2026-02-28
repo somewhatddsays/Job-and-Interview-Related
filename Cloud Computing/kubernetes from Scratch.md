@@ -447,38 +447,35 @@ echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
 **Disable SELinux**
 ```
 setenforce 0
-```
-```
 sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 ```
 ---
 
 **Disable Swap**
 
-swapoff -a
+`swapoff -a`
 
-Edit /etc/fstab and comment swap line.
+Edit `/etc/fstab` and comment swap line.
 
 ---
-✅ Install Docker
-
+**✅ Install Docker**
+```
 yum install -y yum-utils device-mapper-persistent-data
 yum-config-manager --add-repo
 https://download.docker.com/linux/centos/docker-ce.repo
-
 yum install -y docker-ce
 systemctl enable docker
 systemctl start docker
-
+```
 ---
-✅ Install Kubernetes Packages
+**✅ Install Kubernetes Packages**
 
 Create repo:
-
+```
 cat <<EOF > /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
-
+```
 
 
 
