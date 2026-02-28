@@ -109,8 +109,8 @@ It handles:
 - Cattle
 - Managed Cloud Kubernetes (Azure, AWS, GCP, IBM, Alibaba)
 
-## 🧩Kubernetes Architecture & Components
-### Kubernetes Architecture Overview
+## Kubernetes Architecture & Components
+### 🧩Kubernetes Architecture Overview
 A Kubernetes cluster consists of:
 #### ✅Master Node (Control Plane)
    The master node manages the cluster and controls scheduling, monitoring, scaling, and maintaining the desired state.
@@ -118,7 +118,7 @@ A Kubernetes cluster consists of:
    Worker nodes run applications in the form of Pods (containers).
    You can run multiple master nodes for High Availability
 ---
-### Master Node Components
+### 🧠Master Node Components
 - **API Server** (`kube-apiserver`) \
    The **Main entry point** for all cluster operations.\
    It:
@@ -146,3 +146,73 @@ Decides which worker node should run a new Pod based on:
   - affinity/anti-affinity rules
 ---
 - **etcd Cluster**\
+etcd is the cluster's key-value database that stores:
+  - cluster state
+  - node info
+  - workloads
+  - configurations\
+
+   ✅etcd is critical for Kubernetes.
+---
+### 🔌Add-ons in Kubernetes
+- ✅**DNS (CoreDNS)**\
+Provide name resolution inside the cluster
+- ✅**Web UI (Dashboard)**\
+A visual dashboard to manage and troubleshoot the cluster.
+- ✅**Container Runtime**\
+Kubernetes supports runtime such as:
+  - Docker
+  - containerd
+  - CRI-O
+---
+### ⚙️Worker Node Components
+- **kubelet**\
+The kubelet runs on each node and:
+  - connects the node to the master
+  - ensures Pods are running
+  - reports node health
+---
+- **kube-proxy** \
+Handles networking and routing by:
+  - forwarding traffic to the correct Pod 
+  - maintaining iptables rules
+  - enabling Services to work
+---
+
+- kubectl (Kubernetes CLI)\
+`kubectl` is the command-line tool used to send commands to Kubernetes API Server. 
+Every kubectl command becomes an API call to the master.
+---
+
+## Kubernetes Core Concepts
+### 🧱Pod
+A Pod is the smallest deployable unit in Kubernetes.\
+A Pod can run:
+1. [X] One container (most common)
+2. [X] Multiple tightly coupled containers (advanced use case)\
+
+📌Key Pod notes:
+   - Every Pod gets one **IP address** 
+   - Containers inside the same Pod share:
+     - network namespace 
+     - IP address 
+     - resources
+   - Communication between different Pods happens via **Pod IPs**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
