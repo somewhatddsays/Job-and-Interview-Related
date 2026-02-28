@@ -318,8 +318,7 @@ ConfigMaps store configuration like:
 ✅ Keeps configuration separated from Pod YAML
 ---
 ### 💾Volume
-Volumes are Pod-level storage shared across containers in the Pod.
-
+Volumes are Pod-level storage shared across containers in the Pod.\
 ✅Data survives container restarts\
 ❌Removed when the Pod is removed (unless PV/PVC used)
 ---
