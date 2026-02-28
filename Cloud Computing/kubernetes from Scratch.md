@@ -93,8 +93,23 @@ It handles:
 - Configuring and scheduling containers
 - Provisioning and deployments
 - High availability (HA)
+- Application configurations
+- Scaling workloads automatically
+- Hardware resource allocation (CPU/RAM)
+- Load balancing + service discovery
+- Health monitoring
+- Securing container interactions
+---
 
+#### Famous Container Orchestrators
+- Docker Swarm
+- Apache Mesos (Mesosphere)
+- Nomad
+- Cloud Foundry
+- Cattle
+- Managed Cloud Kubernetes (Azure, AWS, GCP, IBM, Alibaba)
 
+## Kubernetes Architecture & Components
 
 
 
