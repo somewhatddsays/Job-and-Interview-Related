@@ -74,7 +74,7 @@
     - Kubernetes log metadata
 
 ## Introduction to Kubernetes
-#### What is Kubernetes?
+### What is Kubernetes?
 Kubernetes (K8s) is an open-source container orchestration platform originally developed by Google. It is used to manage containerized applications across a cluster of machines.
 Kubernetes provides:
 - High availability
@@ -87,7 +87,7 @@ Kubernetes provides:
 
 ---
 
-#### What does orchestration do?
+### What does orchestration do?
 Orchestration is the automation of running containers in production.
 It handles:
 - Configuring and scheduling containers
@@ -101,7 +101,7 @@ It handles:
 - Securing container interactions
 ---
 
-#### Famous Container Orchestrators
+### Famous Container Orchestrators
 - Docker Swarm
 - Apache Mesos (Mesosphere)
 - Nomad
@@ -109,26 +109,40 @@ It handles:
 - Cattle
 - Managed Cloud Kubernetes (Azure, AWS, GCP, IBM, Alibaba)
 
-## Kubernetes Architecture & Components
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## 🧩Kubernetes Architecture & Components
+### Kubernetes Architecture Overview
+A Kubernetes cluster consists of:
+#### ✅Master Node (Control Plane)
+   The master node manages the cluster and controls scheduling, monitoring, scaling, and maintaining the desired state.
+#### ✅Worker Nodes
+   Worker nodes run applications in the form of Pods (containers).
+   You can run multiple master nodes for High Availability
+---
+### Master Node Components
+- **API Server** (`kube-apiserver`) \
+   The **Main entry point** for all cluster operations.\
+   It:
+      - receives commands from kubectl, UI, or automation
+      - Validate requests
+      - coordinates everything in Kubernetes 
+---
+- **Controller Manager** (`kube-controller-manager`) \
+   Runs control loops to maintain the desired state, such as:
+      - creating pods
+      - scaling pods
+      - healing pods
+---
+- **Replication Controller** \
+   Ensures the specified number of Pod replicas are running at all times.
+---
+- **Node Controller**\
+Manages node health and availability in the cluster
+---
+- **Scheduler(`kube-scheduler`)**\
+Decides which worker node should run a new Pod based on:
+  - CPU/RAM availability
+  - node selectors
+  - taints and toleration.
+  - affinity/anti-affinity rules
+---
+- **etcd Cluster**\
