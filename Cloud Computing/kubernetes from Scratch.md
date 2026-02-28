@@ -297,8 +297,9 @@ Affinity is a more powerful version of nodeSelector. It supports:
    - soft preferences 
    - pod-to-pod placement rules
 ---
-### 🚫Taints & Tolerations
-Taints repel Pods from nodes.\
+### 🚫Taints & Toleration
+Taints repel Pods from nodes.
+
 **Example:**\
 `kubectl taint nodes node1 key=value: NoSchedule`\
 **Remove taint:**\
