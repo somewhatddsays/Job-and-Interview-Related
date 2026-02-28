@@ -306,8 +306,8 @@ Taints repel Pods from nodes.
 
 **Remove taint:**
 
-`kubectl taint nodes nodel key value: NoSchedule-
-`
+`kubectl taint nodes nodel key value: NoSchedule-`
+
 ---
 ### ⚙️ConfigMap
 ConfigMaps store configuration like:
