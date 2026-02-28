@@ -1,6 +1,5 @@
 # Kubernetes from Scratch
 
----
 ## Table of Contents
 1. Introduction to Kubernetes
     - What is Kubernetes
