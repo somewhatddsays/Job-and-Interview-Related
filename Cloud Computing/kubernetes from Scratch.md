@@ -300,9 +300,12 @@ Affinity is a more powerful version of nodeSelector. It supports:
 ### 🚫Taints & Toleration
 Taints repel Pods from nodes.
 
-**Example:**\
-`kubectl taint nodes node1 key=value: NoSchedule`\
-**Remove taint:**\
+**Example:**
+
+`kubectl taint nodes node1 key=value: NoSchedule`
+
+**Remove taint:**
+
 `kubectl taint nodes nodel key value: NoSchedule-
 `
 ---
