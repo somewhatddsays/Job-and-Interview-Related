@@ -65,6 +65,10 @@ A place where images are stored and pulled from.
 **Flow**
 >Build &rarr; Tag &rarr; Push &rarr; Pull &rarr; Run
 
+## Blind Mount vs. Volume
+Many devs confuse this.
+- **Blind Mount &rarr;** links local folder directly.
+- **Volume  &rarr;** managed by Docker (more production-safe).
 
 
 
