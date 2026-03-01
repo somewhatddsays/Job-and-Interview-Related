@@ -1,147 +1,521 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>15 Papers That Shaped NLP & LLMs</title>
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #080c14;
+      --glass:     rgba(255,255,255,0.04);
+      --border:    rgba(255,255,255,0.08);
+      --accent:    #4f7cff;
+      --accent2:   #a78bfa;
+      --text:      #e8edf5;
+      --muted:     #6b7c9d;
+      --tag-bg:    rgba(79,124,255,0.12);
+      --tag-text:  #7aa3ff;
+    }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: white;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 128px;
+    }
+
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(120px);
+      opacity: 0.18;
+    }
+    body::before {
+      width: 700px; height: 700px;
+      background: var(--accent);
+      top: -200px; left: -200px;
+    }
+    body::after {
+      width: 500px; height: 500px;
+      background: var(--accent2);
+      bottom: -100px; right: -100px;
+    }
+
+    header {
+      position: relative;
+      z-index: 1;
       text-align: center;
+      padding: 90px 24px 60px;
+    }
+
+    .header-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
     }
 
     h1 {
-      margin-top: 60px;
-      font-size: 2.7rem;
-      font-weight: 600;
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.12;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
     }
 
-    h1 span {
-      color: #3b82f6;
+    h1 em {
+      font-style: italic;
+      color: transparent;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 420px;
+      margin: 0 auto;
+      line-height: 1.7;
+      font-weight: 400;
     }
 
     .timeline {
+      position: relative;
+      z-index: 1;
+      padding: 20px 5% 80px;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 52px;
+    }
+
+    .year-block {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      padding: 60px 8%;
+      grid-template-columns: 110px 1fr;
+      gap: 24px;
+      align-items: start;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.55s ease calc(var(--delay, 0s)),
+                  transform 0.55s ease calc(var(--delay, 0s));
+    }
+
+    .year-block.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .year-label {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      padding-top: 18px;
+      gap: 10px;
+      position: sticky;
+      top: 30px;
+    }
+
+    .year-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .year-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--border), transparent);
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
     }
 
     .card {
-      background: #1e293b;
-      padding: 30px;
-      border-radius: 18px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-      transition: all 0.3s ease;
+      position: relative;
+      display: block;
+      text-decoration: none;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      width: 220px;
+      flex-shrink: 0;
+      transition: transform 0.3s cubic-bezier(0.23,1,0.32,1),
+                  box-shadow 0.3s ease,
+                  border-color 0.3s ease;
+      backdrop-filter: blur(12px);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 0% 0%, rgba(79,124,255,0.08) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
     }
 
     .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+      transform: translateY(-6px) scale(1.015);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(79,124,255,0.2);
+      border-color: rgba(79,124,255,0.3);
     }
 
-    .card h2 {
-      color: #3b82f6;
-      margin-bottom: 15px;
-      font-size: 1.5rem;
+    .card:hover::before { opacity: 1; }
+
+    .card.featured {
+      border-color: rgba(167,139,250,0.25);
+      background: linear-gradient(135deg, rgba(79,124,255,0.07), rgba(167,139,250,0.07));
     }
 
-    .card a {
-      display: block;
-      text-decoration: none;
-      color: #e2e8f0;
-      margin: 8px 0;
-      transition: color 0.2s ease;
-      font-size: 0.95rem;
+    .card.featured::after {
+      content: '★ Latest';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: var(--accent2);
+      background: rgba(167,139,250,0.12);
+      padding: 2px 7px;
+      border-radius: 20px;
+      border: 1px solid rgba(167,139,250,0.2);
     }
 
-    .card a:hover {
-      color: #60a5fa;
+    .card-inner {
+      padding: 18px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      height: 100%;
+    }
+
+    .card-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--tag-text);
+      background: var(--tag-bg);
+      padding: 3px 8px;
+      border-radius: 20px;
+      display: inline-block;
+      width: fit-content;
+    }
+
+    .card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .card-arrow {
+      font-size: 1rem;
+      color: var(--accent);
+      opacity: 0;
+      transform: translate(-4px, 4px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      align-self: flex-end;
+    }
+
+    .card:hover .card-arrow {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px 24px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 680px) {
+      .year-block { grid-template-columns: 1fr; }
+      .year-label {
+        flex-direction: row;
+        align-items: center;
+        position: static;
+        padding-top: 0;
+        gap: 12px;
+      }
+      .year-line {
+        width: 100%; height: 1px;
+        background: linear-gradient(to right, var(--border), transparent);
+        flex: 1;
+      }
+      .cards { flex-direction: column; }
+      .card { width: 100%; }
     }
   </style>
-
 </head>
-
 <body>
 
-  <h1>15 Papers That Shaped <span>NLP & LLMs</span></h1>
+  <div class="noise"></div>
+
+  <header>
+    <div class="header-eyebrow">
+      <span class="dot"></span>
+      Research Landmarks
+      <span class="dot"></span>
+    </div>
+    <h1>15 Papers That<br><em>Shaped NLP & LLMs</em></h1>
+    <p class="subtitle">From transformers to reasoning — the foundational ideas that built modern AI.</p>
+  </header>
 
   <div class="timeline">
 
-    <div class="card">
-      <h2>2017</h2>
-      <a href="https://arxiv.org/abs/1706.03762" target="_blank">
-        Attention Is All You Need
-      </a>
+    <div class="year-block" style="--delay: 0.05s">
+      <div class="year-label">
+        <span class="year-num">2017</span>
+        <div class="year-line"></div>
+      </div>
+      <div class="cards">
+        <a class="card" href="https://arxiv.org/abs/1706.03762" target="_blank">
+          <div class="card-inner">
+            <div class="card-tag">Architecture</div>
+            <div class="card-title">Attention Is All You Need</div>
+            <div class="card-desc">Introduced the Transformer, replacing RNNs entirely with self-attention mechanisms.</div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </a>
+      </div>
     </div>
 
-    <div class="card">
-      <h2>2018</h2>
-      <a href="https://arxiv.org/abs/1810.04805" target="_blank">
-        BERT
-      </a>
+    <div class="year-block" style="--delay: 0.1s">
+      <div class="year-label">
+        <span class="year-num">2018</span>
+        <div class="year-line"></div>
+      </div>
+      <div class="cards">
+        <a class="card" href="https://arxiv.org/abs/1810.04805" target="_blank">
+          <div class="card-inner">
+            <div class="card-tag">Pre-training</div>
+            <div class="card-title">BERT</div>
+            <div class="card-desc">Bidirectional encoder representations that redefined transfer learning in NLP.</div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </a>
+      </div>
     </div>
 
-    <div class="card">
-      <h2>2020</h2>
-      <a href="https://arxiv.org/abs/2005.14165" target="_blank">
-        GPT-3: Few-Shot Learners
-      </a>
-      <a href="https://arxiv.org/abs/1910.10683" target="_blank">
-        T5
-      </a>
-      <a href="https://arxiv.org/abs/2001.08361" target="_blank">
-        Scaling Laws
-      </a>
-      <a href="https://arxiv.org/abs/2005.11401" target="_blank">
-        RAG
-      </a>
+    <div class="year-block" style="--delay: 0.15s">
+      <div class="year-label">
+        <span class="year-num">2020</span>
+        <div class="year-line"></div>
+      </div>
+      <div class="cards">
+        <a class="card" href="https://arxiv.org/abs/2005.14165" target="_blank">
+          <div class="card-inner">
+            <div class="card-tag">Few-Shot</div>
+            <div class="card-title">GPT-3: Few-Shot Learners</div>
+            <div class="card-desc">Demonstrated that scale alone enables in-context learning without fine-tuning.</div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </a>
+        <a class="card" href="https://arxiv.org/abs/1910.10683" target="_blank">
+          <div class="card-inner">
+            <div class="card-tag">Seq2Seq</div>
+            <div class="card-title">T5</div>
+            <div class="card-desc">Unified all NLP tasks into a text-to-text framework with a single model.</div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </a>
+        <a class="card" href="https://arxiv.org/abs/2001.08361" target="_blank">
+          <div class="card-inner">
+            <div class="card-tag">Theory</div>
+            <div class="card-title">Scaling Laws</div>
+            <div class="card-desc">Power-law relationships between model size, data, compute, and loss.</div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </a>
+        <a class="card" href="https://arxiv.org/abs/2005.11401" target="_blank">
+          <div class="card-inner">
+            <div class="card-tag">Retrieval</div>
+            <div class="card-title">RAG</div>
+            <div class="card-desc">Retrieval-augmented generation for knowledge-intensive NLP tasks.</div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </a>
+      </div>
     </div>
 
-    <div class="card">
-      <h2>2021</h2>
-      <a href="https://arxiv.org/abs/2106.09685" target="_blank">
-        LoRA
-      </a>
+    <div class="year-block" style="--delay: 0.2s">
+      <div class="year-label">
+        <span class="year-num">2021</span>
+        <div class="year-line"></div>
+      </div>
+      <div class="cards">
+        <a class="card" href="https://arxiv.org/abs/2106.09685" target="_blank">
+          <div class="card-inner">
+            <div class="card-tag">Fine-tuning</div>
+            <div class="card-title">LoRA</div>
+            <div class="card-desc">Low-rank adaptation for efficient fine-tuning with a fraction of trainable parameters.</div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </a>
+      </div>
     </div>
 
-    <div class="card">
-      <h2>2022</h2>
-      <a href="https://arxiv.org/abs/2201.11903" target="_blank">
-        Chain-of-Thought Prompting
-      </a>
-      <a href="https://arxiv.org/abs/2203.11171" target="_blank">
-        Self-Consistency
-      </a>
-      <a href="https://arxiv.org/abs/2205.11916" target="_blank">
-        Toolformer
-      </a>
-      <a href="https://arxiv.org/abs/2203.02155" target="_blank">
-        Instruction Tuning
-      </a>
-      <a href="https://arxiv.org/abs/2112.01488" target="_blank">
-        ColBERTv2
-      </a>
+    <div class="year-block" style="--delay: 0.25s">
+      <div class="year-label">
+        <span class="year-num">2022</span>
+        <div class="year-line"></div>
+      </div>
+      <div class="cards">
+        <a class="card" href="https://arxiv.org/abs/2201.11903" target="_blank">
+          <div class="card-inner">
+            <div class="card-tag">Reasoning</div>
+            <div class="card-title">Chain-of-Thought Prompting</div>
+            <div class="card-desc">Step-by-step reasoning in prompts dramatically improves complex task performance.</div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </a>
+        <a class="card" href="https://arxiv.org/abs/2203.11171" target="_blank">
+          <div class="card-inner">
+            <div class="card-tag">Decoding</div>
+            <div class="card-title">Self-Consistency</div>
+            <div class="card-desc">Sample multiple reasoning paths and take the majority vote for robust answers.</div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </a>
+        <a class="card" href="https://arxiv.org/abs/2205.11916" target="_blank">
+          <div class="card-inner">
+            <div class="card-tag">Tool Use</div>
+            <div class="card-title">Toolformer</div>
+            <div class="card-desc">Models taught to use APIs via self-supervised learning over tool call data.</div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </a>
+        <a class="card" href="https://arxiv.org/abs/2203.02155" target="_blank">
+          <div class="card-inner">
+            <div class="card-tag">Alignment</div>
+            <div class="card-title">Instruction Tuning</div>
+            <div class="card-desc">Fine-tuning on instruction-following examples for zero-shot generalization.</div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </a>
+        <a class="card" href="https://arxiv.org/abs/2112.01488" target="_blank">
+          <div class="card-inner">
+            <div class="card-tag">Retrieval</div>
+            <div class="card-title">ColBERTv2</div>
+            <div class="card-desc">Late interaction for efficient and effective neural information retrieval.</div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </a>
+      </div>
     </div>
 
-    <div class="card">
-      <h2>2023</h2>
-      <a href="https://arxiv.org/abs/2306.05685" target="_blank">
-        LLMs as a Judge
-      </a>
+    <div class="year-block" style="--delay: 0.3s">
+      <div class="year-label">
+        <span class="year-num">2023</span>
+        <div class="year-line"></div>
+      </div>
+      <div class="cards">
+        <a class="card" href="https://arxiv.org/abs/2306.05685" target="_blank">
+          <div class="card-inner">
+            <div class="card-tag">Evaluation</div>
+            <div class="card-title">LLMs as a Judge</div>
+            <div class="card-desc">Using LLMs to evaluate other LLMs — scalable automated quality assessment.</div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </a>
+      </div>
     </div>
 
-    <div class="card">
-      <h2>2025</h2>
-      <a href="https://arxiv.org/abs/2401.02954" target="_blank">
-        DeepSeek-R1
-      </a>
+    <div class="year-block" style="--delay: 0.35s">
+      <div class="year-label">
+        <span class="year-num">2025</span>
+        <div class="year-line"></div>
+      </div>
+      <div class="cards">
+        <a class="card featured" href="https://arxiv.org/abs/2401.02954" target="_blank">
+          <div class="card-inner">
+            <div class="card-tag">Reasoning</div>
+            <div class="card-title">DeepSeek-R1</div>
+            <div class="card-desc">Reinforcement learning for reasoning, achieving frontier performance at open-source scale.</div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </a>
+      </div>
     </div>
 
   </div>
+
+  <footer>
+    <span>15 foundational works · 2017–2025</span>
+  </footer>
+
+  <script>
+    const blocks = document.querySelectorAll('.year-block');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    blocks.forEach(b => observer.observe(b));
+  </script>
 
 </body>
 </html>
