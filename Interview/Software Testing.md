@@ -122,15 +122,18 @@ defects.
 Automation testing uses tools and scripts to execute test cases automatically to improve efficiency and accuracy
 
 #### Difference between Black Box, White Box & Grey Box Testing?
-|Feature | Black Box Testing | White Box Testing | Grey Box Testing |
-|---|---|---|---|---|
-|**Code knowledge** | No knowledge of internal code | Full knowledge of code | Partial knowledge of code |
-|**Tester** | Manual tester / QA | Developer / Automation tester | QA with technical knowledge |
-|**Focus** | Functionality & UI | Code logic & structure | Functionality + logic |
-|**Test case design** | Based on requirements | Based on code | Based on requirements & design |
-|**Techniques used** | Equivalence partitioning, Boundary value analysis | Statement, branch, path coverage | Data flow, integration testing |
-|**Access to source code** | ❌ No | ✅ Yes | ⚠️ Limited |
-|**Example** | Login testing via UI | Testing if-else and loops | Testing UI + API + DB |
+
+
+| Feature                    | Black Box Testing                                 | White Box Testing                     | Grey Box Testing                   |
+|:---------------------------|:--------------------------------------------------|:--------------------------------------|:-----------------------------------|
+| **Code knowledge**         | No knowledge of internal code                     | Full knowledge of code                | Partial knowledge of code          |
+| **Tester**                 | Manual tester / QA                                | Developer / Automation tester         | QA with technical knowledge        |
+| **Focus**                  | Functionality & UI                                | Code logic & structure                | Functionality + logic              |
+| **Test case design**       | Based on requirements                             | Based on code                         | Based on requirements & design     |
+| **Techniques used**        | Equivalence partitioning, Boundary value analysis | Statement, branch, path coverage      | Data flow, integration testing     |
+| **Access to source code**  | ❌ No                                              | ✅ Yes                                 | ⚠️ Limited                         |
+| **Example**                | Login testing via UI                              | Testing if-else and loops             | Testing UI + API + DB              |
+
 
 #### What is the Functional and Non-Functional Testing?
 - **Functional Testing**\
