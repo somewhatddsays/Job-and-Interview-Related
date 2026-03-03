@@ -190,6 +190,25 @@ Automation testing uses tools and scripts to execute test cases automatically to
 
 Optional/ Additional States
 
+| Type             | Description                             |
+|------------------|-----------------------------------------|
+| Rejected         | Bug is not valid                        |
+| Duplicate        | Same bug already reported               |
+| Deferred         | Bug fix postponed to further release    |
+| Reopened         | Bug still exists after fix              |
+| Cannot Reproduce | Developer unable to reproduce the issue |
+
+
+
+
+
+
+
+
+
+
+
+
 #### 
 #### 
 #### 
