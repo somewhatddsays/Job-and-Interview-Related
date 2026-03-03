@@ -173,7 +173,19 @@ Automation testing uses tools and scripts to execute test cases automatically to
 
 > **Easy flow to remember**\
 > Error &rarr; Fault &rarr; Defect &rarr; Failure &rarr; Bug
-#### 
+
+#### Stages of Bug Life Cycle
+
+| Types    | Description                                                 |
+|:---------|:------------------------------------------------------------|
+| New      | Tester finds and logs a defect                              |
+| Assigned | Test lead/ manager assigns the bug to a developer           |
+| Open     | Developer accepts the bug and starts working on it.         |
+| Fixed    | Developer fixes the issue and updates the status to _fixed_ |
+| Retest   | Tester retests the application to verify the fix.           |
+| Closed   | If the bug is fixed successfully, tester closes the bug.    |
+
+
 #### 
 #### 
 #### 
