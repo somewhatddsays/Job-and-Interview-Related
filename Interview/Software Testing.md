@@ -185,6 +185,7 @@ Automation testing uses tools and scripts to execute test cases automatically to
 | Retest   | Tester retests the application to verify the fix.           |
 | Closed   | If the bug is fixed successfully, tester closes the bug.    |
 
+Optional/ Additional States
 
 #### 
 #### 
