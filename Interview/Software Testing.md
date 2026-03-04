@@ -188,7 +188,7 @@ Automation testing uses tools and scripts to execute test cases automatically to
 | Retest   | Tester retests the application to verify the fix.           |
 | Closed   | If the bug is fixed successfully, tester closes the bug.    |
 
-Optional/ Additional States
+  **Optional/ Additional States**
 
 | Type             | Description                             |
 |------------------|-----------------------------------------|
@@ -198,26 +198,146 @@ Optional/ Additional States
 | Reopened         | Bug still exists after fix              |
 | Cannot Reproduce | Developer unable to reproduce the issue |
 
+#### Severity and Priority
+Severity defines the impact of a defect on the application. Priority defines how urgently it needs to be fixed.
+
+**Severity Levels**
+* Blocker
+* Critical
+* Major
+* Minor
+
+**Priority Levels**
+
+* High
+* Medium
+* Low
+
+#### Real time scenarios for Severity and Priority
+1. **High Severity &mdash; High Priority**\
+   **Example**:
+      1. Users are unable to log in after entering correct credentials.
+      2. User cannot register a new account.
+      3. OTP not received during login. 
+
+2. **High Severity &mdash; Low Priority**\
+   **Example**
+      1. Application crashes when user uploads a profile picture larger than 50Mb.
+      2. System fails when entering special characters in a optional `Middle Name` field.
+      3. Error occurs when user sets system date to a future year (like 2040).
+
+3. **Low Severity &mdash; Low Priority**\
+   **Example**
+      1. Spelling mistake on login page: `Passwrod` instead of `Passsword`.
+      2. Alignment issue.
+
+4. **Low Severity &mdash; High Priority**\
+   **Example**
+      1. Company logo is not visible on the homepage.
+      2. Wrong company name displayed on homepage.
+
+---
+
+#### Agile Methodology
+* Agile methodology is a software development approach that focuses on flexibility, collaboration, continuous improvement, and delevering working software in small, incremental releases.
+* Instead of completing the entire project at once (like in Waterfall Model of Software Development), Agile divides the project into small iterations called sprints (usually 2&mdash;4 weeks).
 
 
+#### Agile Process
+1. **Sprint Planning**\
+The team selects user stories from the product backlog and defines the tasks to be completed during the sprint. Goals, timelines, and responsibilities are clearly planned.
+2. **Daily Stand-up**\
+A short 15-minute daily meeting where team members discuss what they completed yesterday, what they will work on today, and any blockers they are facing.
+3. **Sprint Execution**\
+During the sprint (usually 2-4 weeks), the team performs development, testing, and other related activities to complete the planned tasks.
+4. **Sprint Review**\
+At the end of the sprint, the team demonstrates the completed features to stakeholders and collects feedback.
+5. **Sprint Retrospective**\
+The team discusses what went well, what could be improved, and identifies action items to improve the next sprint.
 
+#### What is Test Scenario
 
+A high-level description of what needs to be tested.
+  * It tells **What to test**
+  * **Example** (Login Page):
+    * Verify login functionality. 
+    * Verify error message for invalid credentials. 
+    * Verify "Forgot Password" feature
 
+#### What is Test case?
 
+A detailed step-by-step procedure to test a specific functionality.
+* It tells **How to test**
+* **Example** (Login Page Test Case):
 
+**Test Case**: Verify login with valid credentials
+  * Step 1: Open application 
+  * Step 2: Enter valid username 
+  * Step 3: Enter valid password 
+  * Step 4: Click Login button 
+* Expected Result: User should be redirected to Home Page
 
+#### Difference between Test Scenario and Test Case
 
+| Test Scenario                              | Test Case             |
+|:-------------------------------------------|:----------------------|
+| High-level description                     | Detailed step-by-step |
+| Covers functionality                       | Covers validation     |
+| Less detailed                              | More detailed         |
+| One scenraio can have mupltiple test cases | Derived from scenario |
 
+#### What is Test Strategy?
+A Test Strategy is a high-level document that defines:
+* Testing approach (Manual/Automation)
+* Test levels (Unit, Integration, System)
+* Types of testing (Functional, Regression, Performance)
+* Tools used 
+* Risk management 
+* Entry & Exit criteria
 
-#### 
-#### 
-#### 
-#### 
-#### 
-#### 
-#### 
-#### 
-#### 
+It defines how testing will be done in general. Usually common for multiple projects.
+
+#### What is Test Plan?
+A Test Plan is a detailed document created for a specific project.\
+It includes:
+* Project scope
+* Feature to test
+* Feature not to test
+* Test schedule
+* Resource allocation
+* Test Environment
+* Deliverables
+* Risk and mitigation
+
+It defines **how testing will be executed for this specific project**.
+
+#### Difference between Test Plan and Test Strategy
+
+| Test Plan                                 | Test Strategy                                             |
+|:------------------------------------------|:----------------------------------------------------------|
+| Detailed document for a specific project  | High-level document for overall testing approach          |
+| Prepared by Test Manager/ Lead            | Usually prepared by senior management/ organisation level |
+| Project-specific                          | Organization-level (common for multiple projects)         |
+| Can change from project to project        | Usually does not change frequently                        |
+| Includes scope, schedule, resource, risks | Includes testing types, levels, tools, standards.         |
+
+#### What is Requirement Traceability Matrix?
+RTM (Requirement Traceability Matrix) is a document used in software testing to track requirements and ensure that all requirements are covered by test cases.\
+1. [X] It helps to verify that:
+2. [X] All requirements are tested
+3. [X] No requirement is missed
+4. [x] All test cases are linked to requirements.bvv
+
+Types of Traceability:
+1. Forward Traceability
+    * Requirement **&rarr;** Test Case
+    * Ensures all requirements are covered
+2. Backward Traceability
+    * Test Case **&rarr;** Requirement
+    * Ensures no extra test cases exist without requirement.
+3. Bidirectional Traceability
+    * Both forward & backward tracking
+    * 
 #### 
 #### 
 #### 
