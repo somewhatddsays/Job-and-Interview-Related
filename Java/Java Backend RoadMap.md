@@ -47,7 +47,7 @@ AWS Deployment
 **Practice**: Program on numbers, loop patterns, arrays, strings
 <details>
 
----
+
 
 <summary><strong>2. Object&mdash;Oriented Programming (OOPS)</strong></summary>
 
