@@ -13,6 +13,7 @@ Spring Boot (FOCUS HERE)
     ↓
 AWS Deployment
 ```
+--- 
 
 ## Core Java Topics
 <details>
@@ -45,6 +46,9 @@ AWS Deployment
 
 **Practice**: Program on numbers, loop patterns, arrays, strings
 <details>
+
+---
+
 <summary><strong>2. Object&mdash;Oriented Programming (OOPS)</strong></summary>
 
 - Class
