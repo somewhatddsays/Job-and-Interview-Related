@@ -799,12 +799,97 @@ flowchart LR
     B -->|NS record| C[🖥️ example.com Nameserver]
 ```
 
+## DNS Record Types
+
+DNS records, also known as zone files, provide information about a domain. This includes the IP
+address that is associated with this domain and how to handle queries for it. Each DNS record has a
+time-to-live setting TTL which indicates how Often a DNS server Will refresh it.</br>
+Below are the most commonly used types of DNS records and their meanings:
+
+| Type    | Name                        | Description                                                                                                                      |
+|:--------|:----------------------------|:---------------------------------------------------------------------------------------------------------------------------------|
+| `A`     | Host address                | The most basic and most commonly used DNS record. It translates human-friendly domain names into computer-friendly IP addresses. |
+| `AAAA`  | IPv6 host address           | Same as A but for IPv6 (a host address that can have more than one IP address).                                                  |
+| `CNAME` | Canonical name for an alias | Maps a name to another name. It should only be used when there are no other records on that name.                                |
+| `ALIAS` | Auto resolved alias         | Maps a name to another name but can coexist with other records on that name.                                                     |
+| `MX`    | Mail eXchange               | Specifies the e-mail server(s) responsible for a domain name.                                                                    |
+| `NS`    | Name Server                 | Identifies the DNS servers responsible for a zone. One NS record for each DNS server in a zone.                                  |
+| `TXT`   | Descriptive Text            | Holds general information about a domain name such as who is hosting it, contact person, phone number, etc.                      |
 
 
+## DHCP
+DHCP (Dynamic Host Configuration Protocol) is a network management protocol that automatically assigns IP addresses and other network configurations (such as subnet mask, gateway, DNS servers) to devices on a network. </br>
+**Example**:
+- When you connect your laptop to a Wi-Fi network, a DHCP server assigns it an IP address automatically, allowing it to communicate with other devices on the network without manual configuration.
 
+## Network Components and Services
+### Routers and Switches
+- Routers Connect different networks and direct data packets between them.
+- Switches Connect devices within the same network and use MAC addresses to forward data to the correct device.
 
+### Firewalls
+- Firewalls control incoming and outgoing network traffic based on predetermined security rules.
 
+### Load Balancers
+Load balancers distribute incoming network traffic across multiple servers to ensure no single server becomes overwhelmed.
 
+### VPN
+VPN Virtual Private Network) provides a secure connection between remote users and the corporate network over the internet.
+
+## Network Troubleshooting Tools:
+
+### `ping`
+- **Purpose**: Test internet network connections.
+- **How It Works**: Uses the **ICMP ECHO_REQUEST** to get an **ICMP ECHO_RESPONSE** from a remote host.
+- **Usage**: For basic troubleshooting, you can run ping www.google.com to check network connectivity and see response times and packet loss
+
+### `traceroute (or tracert on Windows)`
+- **Purpose**: Track the route packets take to reach their destination.
+- **How It Works**: Sends **UDP** probes with increasing **TTL** values, showing each router along the route and the delay in reaching it.
+- **Usage**: Helps find which gateway is causing a delay by showing response times and where packets fail (indicated by).
+
+### `telnet`
+- **Purpose**: Test network connections and protocols. How It Works Attempts to establish a connection to a specified IP and port.
+- **Usage**: Test if a specific service is reachable, e.g., telnet google.com 443.
+
+### `curl`
+- **Purpose**: Transfer data using multiple protocols, often for HTTP requests.
+- **Usage**: 
+  - **Basic GET request**: `curl http://example.com`.
+  - **Check headers**: `curl -1 http://example.com`.
+  - **POST request**: c`url -X POST http://example.com`.
+  - **Save response to file**: `curl http://example.com/file-o output.file`.
+
+### `dig (Domain Information Groper)`
+- **Purpose**: Troubleshoot DNS problems and verify DNS records.
+- **How It Works**: Performs DNS lookups and displays information such as IP addresses.
+- **Usage**: dig google.com to get information like IP addresses, TTL, and DNS record types.
+
+### `netstat`
+- **Purpose**: Show network connections and port listening information.
+- **Usage**:
+  - `netstat -lp` List listening servers and their program names.
+  - `netstat -a` Show all active ports.
+  - `netstat -r` Show routing table.
+
+### `nmap (Network Mapper)`
+- **Purpose**: Discover hosts and services on a network.
+- **How It Works**: Sends raw packets to identify hosts, services, and operating systems.
+- **Usage**:
+  - **Discover hosts**: nmap -sn 172.31.44.35/20.
+  - **Scan ports on a host**: nmap -Α 172.31.36.237.
+
+### `ssh (Secure Socket Shell)`
+- **Purpose**: Securely connect to remote machines to execute commands.
+- **Usage**:
+  - **Connect to a server**: ssh username@hostname.
+  - **Secure and encrypted**, used for remote management and file transfers.
+
+### `scp (Secure Copy Protocol)`
+- **Purpose**: Securely copy files between local and remote hosts.
+- **Usage**: Copy file to a remote server: scp localfile.txt user@remote:/path/to/destination.
+
+These tools are invaluable for network diagnostics, troubleshooting, and secure communications, which are critical skills for any DevOps engineer.
 
 
 
