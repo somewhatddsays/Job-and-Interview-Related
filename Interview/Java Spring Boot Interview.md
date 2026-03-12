@@ -10,7 +10,7 @@
 ---
 
 ## Core Concepts & Annotations
-Spring Boot is an opinionated framework built on top of Spring Framework
+Spring Boot is an opi1nionated framework built on top of Spring Framework
 that simplifies application development through:
 - **Auto-configuration**: Automatically configures beans based on classpath.
 - **Starter dependencies**:Pre-configured dependency bundles.
