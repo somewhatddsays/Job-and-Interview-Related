@@ -2,13 +2,6 @@
 
 Most people think ML requires years of Math. In reality, most ML relies on just three areas.
 
-|%age| Topic|
-|||
-|||
-|||
-|||
-
-
 ```mermaid
 pie title MMMath Study Distribution (Interview-Oriented)
     "Probability & Statistics" : 50
