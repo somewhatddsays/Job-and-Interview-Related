@@ -24,7 +24,7 @@ provides sensible defaults and auto-configuration.
 @SpringBootApplication is a composite annotation that combines three
 essential annotations:
 
- ```bash
+ ```java
  @SpringBootApplication
  // Equivalent to:
  // @Configuration + @EnableAutoConfiguration + @ComponentScan
@@ -68,7 +68,7 @@ Autoconfiguration works through:
 3. **spring.factories file**: Lists autoconfiguration classes
 4. **Classpath scanning**: Detects dependencies and configures accordingly
 
-```bash
+```java
 @Configuration
 @ConditionalOnClass(DataSource.class)
 @ConditionalOnMissingBean(DataSource.class)
@@ -99,7 +99,7 @@ Spring Boot supports multiple configuration sources in order of precedence:
 * Default properties
 
 \# _application.yml_
-```
+```java
 
 server:
     port: 8080
@@ -147,7 +147,7 @@ spring:
 
 ### How do you handle different environments (dev/test/prod)?
 Use Spring Profiles:
-```
+```yaml
 # application .ymL (default)
 spring:
     profiles :
@@ -184,7 +184,7 @@ logging:
 ### How do you validate configuration properties?
 Use **Bean Validation annotations**:
 
-```
+```java
 @Configuration Properties (prefix "app")
 @Validated
 @Component
@@ -217,7 +217,7 @@ Spring Data JPA is a layer on top of JPA that provides:
 | `Custom queries`         | Support for JPQL and native SQL    |
 | `Pagination and sorting` | Built-in support                   |
 
-```
+```java
 @Entity
 @Table(name = "users")
 public class User {
@@ -251,7 +251,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 PA supports four relationship types:
 * One-to-One:
 
-```aiignore
+```java
 @Entity
 public class User{
     @OneToOne(cascade = CascadeType.ALL)
@@ -262,7 +262,7 @@ public class User{
 
 * One-to-Many
 
-```aiignore
+```java
 @Entity
 public class Department{
     @OneToMany (mappedBy = "department", cascade = CascadeType.ALL)
@@ -272,7 +272,7 @@ public class Department{
 
 * Many-to-One
 
-```aiignore
+```java
 @Entity
 public class Employee{
     @ManyToOne
@@ -283,7 +283,7 @@ public class Employee{
 
 * Many-to-Many:
 
-```aiignore
+```java
 @Entity
 public class Student{
     @ManyToMany
