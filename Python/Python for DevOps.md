@@ -185,8 +185,8 @@ A modules is a Python file.
 ### Packages
 Packages are collections of modules.
 >my_package/ <br>
-> |&mdash; __init__.py
-> |&mdash; module1.py
+> |&mdash; __init__.py <br>
+> |&mdash; module1.py <br>
 > |&mdash; module2.py
 
 Package help organize large DevOps automation projects.
