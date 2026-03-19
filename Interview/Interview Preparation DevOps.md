@@ -11,11 +11,15 @@ Docker provides three types of Volumes:
 | `Anonymous Volume` | Docker manages the volume without a specific name           |
 | `Named Volume`     | User-defined and persisted independently of containers.     |
 
+---
+
 #### What is Kubernetes `taint` and `tolerance`?
 * **Taint** is applied on a node to **restrict** and scheduling.
 * **Toleration** is applied on pods to **allow** them to run on tainted nodes.
 
 Used to **isolate workloads**, e.g., run only specific apps on specific nodes.
+
+---
 
 #### If you want to add an existing resource to the Terraform state file?
 Use the following command:
@@ -23,12 +27,18 @@ Use the following command:
 terraform import <resource_address> <resource_id>
 ```
 
+---
+
 #### Can pod-to-pod communication happen by default?
 Yes.<br>
 In kubernetes, all pods can communicate with each other by default within the cluster because the cluster network is **flat and non-restrictive** unless **Network Policies** restrict it.
 
+---
+
 #### What are Helm charts?
 A **Helm Chart** is a package of `YAML` templates used to deploy Kubernetes applications through versioned, repeatable, and configurable deployments.
+
+---
 
 #### How will you deploy Jenkins in your organization?
 4 common approaches:
@@ -36,6 +46,8 @@ A **Helm Chart** is a package of `YAML` templates used to deploy Kubernetes appl
 2. **Docker container**
 3. **Helm chart deployment on EKS**
 4. **Kubernetes YAML manifests**
+
+---
 
 #### When you deploy Jenkins with Helm, what is the folder structure?
 A helm chart typically includes:
@@ -53,11 +65,14 @@ charts/
 README.md
 ```
 
+---
+
 #### How much time will be taken for a Jenkins job completion?
 Depends on pipeline stages, application build time, tests, and infra speed.
 <br>
 Typically ranges from **1 minute to 15+ minutes** depending on the complexity.
 
+---
 
 #### Where do you deploy the microservices?
 Usually deployed in:
@@ -67,9 +82,12 @@ Usually deployed in:
 * **EC2**
 * **Fargate**
 
+---
 
 #### Who manages the infrastructure in your organization?
 Infrastructure is usually managed by the **DevOps Team** using IaC tools like **Terraform**, **ClouFormation**, and **Ansible**.
+
+---
 
 #### Application deployed in EKS but not accessible externally &mdash how will you debug?
 **Steps**:
@@ -80,6 +98,7 @@ Infrastructure is usually managed by the **DevOps Team** using IaC tools like **
 5. Check **DNS** mapping.
 6. Check if pods are running and services endpoints exist.
 
+---
 
 #### Explain the Git branching strategy
 Most Common: Gitflow &mdash;
@@ -89,11 +108,14 @@ Most Common: Gitflow &mdash;
 * **release/** &mdash; Pre-Production
 * **hotfix/** &mdash; Quick patches on production
 
+---
+
 #### How can you restrict pod-to-pod communication?
 Using **Kubernetes NetworkPolicies**:
 * Deny all traffic
 * Allow only specific namespace/ app/ labels
 
+---
 
 #### Suppose Jenkins pipeline fails &mdash; how will you debug?
 * Check console output
@@ -103,6 +125,7 @@ Using **Kubernetes NetworkPolicies**:
 * Check **Git authentication**
 * Check **Stage-specific errors**
 
+---
 
 #### How does communication happen in an EKS cluster?
 Through:
@@ -110,6 +133,8 @@ Through:
 * **Service (ClusterIP/ NodePort/ LoadBalancer)**
 * **CoreDNS**
 * **VPC routing**
+
+---
 
 #### Python program to read log file and print error count
 
@@ -122,14 +147,20 @@ with open("app.log", "r") as f:
 print("Total ERROR messages:", count)
 ```
 
+---
+
 #### What type of agents are you using in Jenkins?
 * Static EC2 agents
 * Dynamic agents via Kubernetes plugin
 * Docker agents
 * Self-hosted runners
 
+---
+
 #### How are you deploying Jenkins: EC2 or EKS?
 Depends on the organization, but commonly using **EKS with Helm** for scalability.
+
+---
 
 #### Difference between StatefulSet and Deployment?
 
@@ -139,6 +170,8 @@ Depends on the organization, but commonly using **EKS with Helm** for scalabilit
 | No stable indentity   | Stable network identity    |
 | ReplicaPods identical | Persistent storage per pod |
 
+---
+
 #### Explain RBAC in Kubernetes
 **RBAC = Role-Based Access Control** <br>
 Controls **who** can access **what** using:
@@ -147,6 +180,7 @@ Controls **who** can access **what** using:
 * **RoleBinding**
 * **ClusterRoleBinding**
 
+---
 
 #### Jenkins deployed via `Helm` &mdash; how to update plugins?
 **Two ways**:
@@ -155,11 +189,15 @@ Controls **who** can access **what** using:
 
 `helm upgrade jenkins -f values.yaml jenkins/ jenkins`
 
+---
+
 #### How do you store secrets in Kubernetes?
 Using:
 * **Kubernetes Secrets**  (Based64 encoded)
 * **AWS Secrets Manager + CSI driver**
 * **HashiCorp Vault**
+
+---
 
 #### Lost Jenkins password &mdash; how to restore?
 * If using Helm:
@@ -169,6 +207,8 @@ Using:
     ```
 * Reset via admin account
 * Restore backup (if taken)
+
+---
 
 #### What plugins do you use in Jenkins?
 Common ones:
@@ -181,11 +221,15 @@ Common ones:
 * Slack
 * SonarQube
 
+---
+
 #### How many DevOps engineers are in your team?
 Typical answer: <br>
 **4-6 DevOps engineers**, depending on project size
 
-#### What is your project architechture?
+---
+
+#### What is your project architecture?
 A clean high-level answer:
 * Microservices in **EKS**
 * CI/ CD via **Jenkins/ GitHub Actions**
@@ -194,12 +238,15 @@ A clean high-level answer:
 * Images in **ECR**
 * Logs in **CloudWatch**
 
+---
 
 #### How do you receive tickets?
 **Through**:
 * JIRA
 * ServiceNow
 * Azure DevOps Boards
+
+---
 
 #### EC2 instance type used to deploy apps? Is it sufficient?
 Example answer:<br>
@@ -210,11 +257,15 @@ Choose based on:
 * Auto-scaling
 * Application load
 
+---
+
 #### Deployment strategies used?
 * Rolling update
 * Blue-Green
 * Canary
 * Recreate
+
+---
 
 #### Install Nginx on 10 servers using Ansible?
 Use inventory + playbook
@@ -225,6 +276,8 @@ tasks:
  - name: Install nginx
     apt: name=nginx state=present
 ```
+
+---
 
 #### Explain Ansible structure
 
@@ -238,8 +291,12 @@ host_vars/
 ansible.cfg
 ```
 
+---
+
 #### What is a playbook?
 A `YAML file` that defines **tasks**, **modules**, and **roles** to execute automation.
+
+---
 
 #### What rollback strategies do you follow?
 * Helm rollback
@@ -248,6 +305,8 @@ A `YAML file` that defines **tasks**, **modules**, and **roles** to execute auto
 * Terraform rollback
 * Git revert
 
+---
+
 #### Difference between `git clone` vs. `git fork`, `merge` vs. `rebase`
 
 * **Clone**: Copy repo locally
@@ -255,8 +314,12 @@ A `YAML file` that defines **tasks**, **modules**, and **roles** to execute auto
 * **Merge**: Combines change with merge commit
 * **Rebase**: Rewrites commit history for cleaner log
 
+---
+
 #### How to combine multiple commits into single commit?
 `git rebase -i HEAD~n`
+
+---
 
 #### What is `.git` folder?
 It stores:
@@ -265,6 +328,7 @@ It stores:
 * Objects
 * Configuration
 
+---
 
 #### If you lost .git folder &mdash; how to restore?
 You cannot fully restore. You must `reinitialize`
@@ -275,9 +339,13 @@ git remote add origin <url>
 git fetch
 ```
 
+---
+
 #### Difference between `git pull` and `git fetch`?
 * `git fetch` &mdash; downloads but doesn't merge
 * `git pull` &mdash; downloads + merges automatically
+
+---
 
 #### Where do you store Jenkinsfiles and Dockerfiles?
 Typically in each service repository:
@@ -286,6 +354,8 @@ Typically in each service repository:
     Dockerfile
     Jenkinsfile
 ```
+
+---
 
 #### Docker stops & restarts — data lost. How to fix?
 Use **Docker volumes** or **bind mounts** to persist data.
@@ -298,6 +368,8 @@ Pod keeps crashing and Kubernetes keeps restarting it. Causes:
 * Wrong configs
 * Missing dependencies
 * Liveness probe failure
+
+---
 
 #### How to delete unused Docker containers and images?
 `docker system prune -a`
