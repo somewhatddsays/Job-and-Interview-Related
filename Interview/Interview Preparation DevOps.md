@@ -196,7 +196,6 @@ Using:
 * **Kubernetes Secrets**  (Based64 encoded)
 * **AWS Secrets Manager + CSI driver**
 * **HashiCorp Vault**
-
 ---
 
 #### Lost Jenkins password &mdash; how to restore?
