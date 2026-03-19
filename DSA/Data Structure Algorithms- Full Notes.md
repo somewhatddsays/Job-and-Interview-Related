@@ -22,6 +22,8 @@
 O(1) < O(log n) < O(n) < O(n log n)< O(n2) < O(2<sup>5</sup>) < O(2<sup>n</sup>) < O(n!)
 
 
+---
+
 ## Basic Data Structure
 
 ### Arrays
@@ -79,6 +81,8 @@ O(1) < O(log n) < O(n) < O(n log n)< O(n2) < O(2<sup>5</sup>) < O(2<sup>n</sup>)
   * Worst O(n)
 * **Application**: `Database`, `Caches`, `Symbol Tables`
 
+---
+
 ## Non-Linear Data Structure
 
 ### Trees
@@ -107,13 +111,100 @@ O(1) < O(log n) < O(n) < O(n log n)< O(n2) < O(2<sup>5</sup>) < O(2<sup>n</sup>)
   * Directed/ Undirected
   * Weighted/ Unweighted
   * Cyclic/ Acyclic
-* Representations:
-  * Adjacency Matrix: O(V)
-####
+* **Representations**:
+  * **Adjacency Matrix**: `O(V²)`
+  * **Adjacency List**: O(V + E)
+* **Graph Traversals**:
+  * **BFS (Queue)** &mdash; `O(V + E)`
+  * **DFA (Stack/ Recursion)** &mdash; `O (V + E)`
+* **Algorithms**:
+  * **Shortest Path**: `Dijkstra`, `Bellman-Ford`, `Floyd-Warshall`
+  * **MST**: `Kruskal`, `Prims`
+  * **Topological Sort**
+  * **Union-Find** (Disjoint Set)
+
+**Application**: Networks, maps, social media, scheduling.
 
 
-
-### Trees
+---
 
 ## Algorithms
+### Searching
+- Linear Search: O(n)
+- Binary Search: O(log n) (on sorted arrays)
+
+### Sorting
+| Sort                               | Time notation                   |
+|:-----------------------------------|:--------------------------------|
+| **Bubble/ Insertion/ Selection**:  | `O(n²)`                         |
+| **Merge Sort**                     | `O(n log n)`                    |
+| **Quick Sort**                     | Avg `O(n log n)`, Worst `O(n²)` |
+| **Heap Sort**                      | `O(n log n)`                    |
+| **Counting/ Radix/ Bucket Sort**   | `O(n + k)`                      |
+
+### Divide and Conquer
+* **Break** &rarr; **Solve** &rarr; **Combine**
+* **Example**: 
+  * `Merge Sort`
+  * `Quick Sort`
+  * `Binary Search`
+  * `Matrix Multiplication`
+
+### Greedy Algorithms
+* Make locally optimal choices
+* Examples:
+  * Activity Selection
+  * Huffman Coding
+  * Kruskal & Prim (MST)
+
+### Dynamic Programming (DP)
+
+* Solve subproblems, store results to avoid recomputation
+* **Properties**
+  * Overlapping subproblems
+  * Optimal substructure
+* **Example**:
+  * Fibonacci
+  * Knapsack (0/1, fractional)
+  * Longest Common Sequence (LCS)
+  * Matrix Chain Multiplication
+
+### Backtracking
+
+* Try all possibilities, backtrack if not feasible
+* Example: N-Queens, Sudoku, Rat in a Maze
+
+### Advanced Topics
+* Bit Manipulation: Subsets, fast operations
+* Union-Find (DSU): Connectivity Problems
+* String Algorithms: KMP, Rabin-Karp, Z-Algorithm
+* Graph Advanced: Tarjan's Algorithm (SCC), Floyd-Warshall
+
+---
+
+## Complexity Classes
+* **P**: Problems solvable in polynomial time.
+* **NP**: Solutions verifiable in polynomial time.
+* **NP-Complete**: Hardest problems in NP.
+* **NP-Hard**: At least as hard as a NP-complete
+
+---
+
+## Application of DSA
+* **Real-time systems**: `Scheduling`, `OS Processes`.
+* **Databases**: `Indexing` (B-Trees, Hashing)
+* **AI/ ML**: `Graphs`, `Search Techniques`
+* **Networking**: `Routing Algorithms`
+* **Web Search**: `Graphs`, `hashing`, `trees`
+
+
+
+
+
+
+
+
+
+
+
 
