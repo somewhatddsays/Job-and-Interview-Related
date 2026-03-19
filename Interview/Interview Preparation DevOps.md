@@ -1,5 +1,3 @@
-from nis import cat
-
 # Interview preparation Cheat Sheet For DevOps
 
 #### What are the types of Docker Volumes?
