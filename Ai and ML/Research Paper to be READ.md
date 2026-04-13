@@ -21,3 +21,6 @@
 | 13 | AlphaFold 2                          | 2021 — DeepMind         | Solved protein folding. Won the Nobel Prize.                               | [nature](https://www.nature.com/articles/s41586-021-03819-2) |
 | 14 | Denoising Diffusion (DDPM)           | 2020 — UC Berkeley      | The math behind Stable Diffusion, Midjourney, DALL-E 2.                    | [arxiv](https://arxiv.org/abs/2006.11239)                    |
 | 15 | ReAct                                | 2022 — Google/Princeton | LLMs that reason AND use tools. Foundation of AI agents.                   | [arxiv](https://arxiv.org/abs/2210.03629)                    |
+
+
+**Original Poster**: https://resources.leadgenman.com/15paper
